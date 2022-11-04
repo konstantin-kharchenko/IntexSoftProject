@@ -13,7 +13,7 @@ import javax.validation.constraints.Pattern;
 public class SignInUserDto {
 
     @NotEmpty(message = "username must not be empty")
-    @Pattern(regexp = "^!#$%^&*()_\s", message = "Invalid")
+    @Pattern(regexp = "^[^!#$%^&*()_\\s]*$", message = "Invalid")
     private String username;
 
     @NotEmpty(message = "password must not be empty")
