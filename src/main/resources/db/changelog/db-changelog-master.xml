@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create-table-users" author="postgres">
+        <createTable tableName="users">
+            <column name="user_id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="username" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-table-roles" author="postgres">
+        <createTable tableName="roles">
+            <column name="role_id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-table-users-roles" author="postgres">
+        <createTable tableName="users_roles">
+            <column name="user_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="add-foreign-key-roles-users-role" author="postgres">
+        <addForeignKeyConstraint baseColumnNames="role_id"
+                                 baseTableName="users_roles"
+                                 baseTableSchemaName="public"
+                                 constraintName="fk_role_id"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 referencedColumnNames="role_id"
+                                 referencedTableName="roles"
+                                 referencedTableSchemaName="public"
+        />
+    </changeSet>
+
+    <changeSet id="add-foreign-key-roles-users-user" author="postgres">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="users_roles"
+                                 baseTableSchemaName="public"
+                                 constraintName="fk_user_id"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 referencedColumnNames="user_id"
+                                 referencedTableName="users"
+                                 referencedTableSchemaName="public"
+        />
+    </changeSet>
+
+    <changeSet id="01" author="postgres">
+        <insert tableName="roles">
+            <column name="role_id">1</column>
+            <column name="name">ROLE_USER</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="02" author="postgres">
+        <insert tableName="roles">
+            <column name="role_id">2</column>
+            <column name="name">ROLE_ADMINISTRATOR</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="create-table-authorities" author="postgres">
+        <createTable tableName="authorities">
+            <column name="authority_id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-table-roles-authorities" author="postgres">
+        <createTable tableName="roles_authorities">
+            <column name="role_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="authority_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="add-foreign-key-roles-authorities-roles" author="postgres">
+        <addForeignKeyConstraint baseColumnNames="role_id"
+                                 baseTableName="roles_authorities"
+                                 baseTableSchemaName="public"
+                                 constraintName="fk_role_id"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 referencedColumnNames="role_id"
+                                 referencedTableName="roles"
+                                 referencedTableSchemaName="public"
+        />
+    </changeSet>
+
+    <changeSet id="add-foreign-key-roles-authorities-authorities" author="postgres">
+        <addForeignKeyConstraint baseColumnNames="authority_id"
+                                 baseTableName="roles_authorities"
+                                 baseTableSchemaName="public"
+                                 constraintName="fk_authority_id"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 referencedColumnNames="authority_id"
+                                 referencedTableName="authorities"
+                                 referencedTableSchemaName="public"
+        />
+    </changeSet>
+
+</databaseChangeLog>
