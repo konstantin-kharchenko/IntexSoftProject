@@ -5,6 +5,7 @@ import by.kharchenko.intexsoftproject.model.dto.CustomTokenDto;
 import by.kharchenko.intexsoftproject.model.dto.RegisterUserDto;
 import by.kharchenko.intexsoftproject.model.dto.SignInUserDto;
 import by.kharchenko.intexsoftproject.model.entity.Role;
+import by.kharchenko.intexsoftproject.model.entity.RoleType;
 import by.kharchenko.intexsoftproject.model.entity.User;
 import by.kharchenko.intexsoftproject.model.mapper.UserMapper;
 import by.kharchenko.intexsoftproject.model.repository.RoleRepository;
@@ -18,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -58,7 +60,9 @@ public class UserServiceImpl implements UserService {
         User user = UserMapper.INSTANCE.registerUserDtoToUser(registerUserDto);
         String encryptionPassword = EncryptionPassword.encryption(user.getPassword());
         user.setPassword(encryptionPassword);
-        Set<Role> roles = roleRepository.findAllByNames(registerUserDto.getRoleTypes());
+        Set<Role> roles = new HashSet<>();
+        Optional<Role> role = roleRepository.findByName(RoleType.ROLE_USER.toString());
+        roles.add(role.get());
         user.setRoles(roles);
         boolean isLoginExists = userRepository.findByUsername(registerUserDto.getUsername()).isPresent();
         if (isLoginExists) {

@@ -1,4 +1,4 @@
-package by.kharchenko.intexsoftproject.controller.filter;
+package by.kharchenko.intexsoftproject.controllers.filter;
 
 import by.kharchenko.intexsoftproject.security.JwtAuthentication;
 import by.kharchenko.intexsoftproject.security.JwtTokenProvider;

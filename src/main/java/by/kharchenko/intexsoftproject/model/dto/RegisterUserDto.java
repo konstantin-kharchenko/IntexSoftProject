@@ -30,7 +30,4 @@ public class RegisterUserDto {
     @NotEmpty(message = "email must not be empty")
     @JsonProperty("email")
     private String email;
-
-
-    private Set<RoleType> roleTypes;
 }

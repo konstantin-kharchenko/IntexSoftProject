@@ -8,6 +8,7 @@ public enum RoleType {
 
     @Getter
     private final String name;
+
     RoleType(String name) {
         this.name = name;
     }
