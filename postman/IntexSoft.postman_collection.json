@@ -1,0 +1,143 @@
+{
+	"info": {
+		"_postman_id": "b858fbd4-7e25-46e8-bbed-5e9ee0ddae7d",
+		"name": "IntexSoft",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23262074"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"kostya\",\r\n    \"password\": \"BPpb23-=\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}sign-in",
+							"host": [
+								"{{domain}}sign-in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"kostya\",\r\n    \"password\": \"BPpb23-=\",\r\n    \"email\": \"konhar2002@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}sign-up",
+							"host": [
+								"{{domain}}sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Refresh-Token",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjY4MDA3OTc4LCJleHAiOjE2NjgwMDk3Nzh9.AyOGv2GqSZ-PmbpZsFxbi3oJ9vdYIGWdL0ZgGAyrxh-EyxYEMkW8wBk2MNdqWmh5AvBOsAtL7Yp7NF7Q6de-EA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}refresh",
+							"host": [
+								"{{domain}}refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Home",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Access-Token",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjY4MDA3OTc4LCJleHAiOjE2NjgwMDgwMzgsInJvbGVzIjpbeyJpZCI6MSwicm9sZSI6IlJPTEVfVVNFUiIsImF1dGhvcml0eSI6W3siaWQiOjEsImF1dGhvcml0eSI6IlBPU1QifV19XX0.rNKKpU0HPGg8tm2l_UpJmRaEZG8OcSc6wz-1X9sTmCRHomafsp-llpfI0_tmaMdugqqIxfqotsxyhaEtHSUCdQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}home",
+							"host": [
+								"{{domain}}home"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
