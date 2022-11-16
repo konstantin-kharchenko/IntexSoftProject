@@ -84,20 +84,20 @@
 			"name": "User",
 			"item": [
 				{
-					"name": "Home",
+					"name": "User",
 					"request": {
 						"method": "GET",
 						"header": [
 							{
 								"key": "Access-Token",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjY4MDA3OTc4LCJleHAiOjE2NjgwMDgwMzgsInJvbGVzIjpbeyJpZCI6MSwicm9sZSI6IlJPTEVfVVNFUiIsImF1dGhvcml0eSI6W3siaWQiOjEsImF1dGhvcml0eSI6IlBPU1QifV19XX0.rNKKpU0HPGg8tm2l_UpJmRaEZG8OcSc6wz-1X9sTmCRHomafsp-llpfI0_tmaMdugqqIxfqotsxyhaEtHSUCdQ",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjY4NjIzNDEzLCJleHAiOjE2Njg2MjQzMTMsInJvbGVzIjpbeyJpZCI6MSwicm9sZSI6IlJPTEVfVVNFUiIsImF1dGhvcml0eSI6W3siaWQiOjEsImF1dGhvcml0eSI6IlBPU1QifV19XX0.RrUHUw3GCOot0mnkPQkdn62Z8yoQaAhOGBwV5Avf1WJupth6WbYCs7g9t_B8sQ9qjbRmm3ipk9MgqGNcq5F1Cw",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{domain}}home",
+							"raw": "{{domain}}user",
 							"host": [
-								"{{domain}}home"
+								"{{domain}}user"
 							],
 							"query": [
 								{
