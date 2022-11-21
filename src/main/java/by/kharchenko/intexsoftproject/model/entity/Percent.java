@@ -4,8 +4,8 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Objects;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -13,28 +13,28 @@ import java.util.Set;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "roles")
-public class Role {
+@Table(name = "percents")
+public class Percent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "name")
-    private RoleType role;
+    @Column(name = "min_price")
+    private BigDecimal minPrice;
 
-    @ManyToMany
-    @JoinTable(name = "roles_authorities", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "authority_id"))
-    @ToString.Exclude
-    private Set<Authority> authority;
+    @Column(name = "max_price")
+    private BigDecimal maxPrice;
+
+    @Column(name = "percent")
+    private Integer percent;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Role role = (Role) o;
-        return id != null && Objects.equals(id, role.id);
+        Percent percent = (Percent) o;
+        return id != null && Objects.equals(id, percent.id);
     }
 
     @Override

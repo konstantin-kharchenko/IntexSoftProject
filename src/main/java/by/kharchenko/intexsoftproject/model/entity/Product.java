@@ -4,8 +4,8 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Objects;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -13,28 +13,37 @@ import java.util.Set;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "roles")
-public class Role {
+@Table(name = "products")
+public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "name")
-    private RoleType role;
+    private String name;
 
-    @ManyToMany
-    @JoinTable(name = "roles_authorities", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "authority_id"))
+    @Column(name = "photo_path")
+    private String photoPath;
+
+    @Column(name = "instruction_path")
+    private String instructionPath;
+
+    @Column(name = "price")
+    private BigDecimal price;
+
+    @ManyToOne
+    @JoinColumn(name = "manufacture_id")
     @ToString.Exclude
-    private Set<Authority> authority;
+    private Manufacture manufacture;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Role role = (Role) o;
-        return id != null && Objects.equals(id, role.id);
+        Product product = (Product) o;
+        return id != null && Objects.equals(id, product.id);
     }
 
     @Override

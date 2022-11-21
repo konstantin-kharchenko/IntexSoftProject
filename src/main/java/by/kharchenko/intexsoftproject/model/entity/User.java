@@ -18,7 +18,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "username")
@@ -30,10 +30,30 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "photo_path")
+    private String photoPath;
+
+    @OneToMany(mappedBy = "user")
+    @ToString.Exclude
+    private Set<Order> orders;
+
+    @OneToOne(mappedBy = "user")
+    @ToString.Exclude
+    private LoyaltyCard loyaltyCard;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "baskets", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
+    @ToString.Exclude
+    private Set<Product> products;
+
     @ManyToMany
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     @ToString.Exclude
     private Set<Role> roles;
+
+    @OneToOne(mappedBy = "user")
+    @ToString.Exclude
+    private AllPrice allPrice;
 
     @Override
     public boolean equals(Object o) {

@@ -16,12 +16,8 @@ public class UserDto {
     @JsonProperty("username")
     private String username;
 
-    @JsonProperty("password")
-    private String password;
-
     @JsonProperty("email")
     private String email;
 
-    @JsonProperty("roles")
-    private Set<Role> roles;
+    private String photo;
 }

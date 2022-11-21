@@ -5,15 +5,18 @@ import by.kharchenko.intexsoftproject.model.dto.CustomTokenDto;
 import by.kharchenko.intexsoftproject.model.dto.RegisterUserDto;
 import by.kharchenko.intexsoftproject.model.dto.SignInUserDto;
 import by.kharchenko.intexsoftproject.model.dto.UserDto;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
 public interface UserService {
     Optional<CustomTokenDto> signIn(SignInUserDto signInUserDto) throws ServiceException;
 
-    boolean signUp(RegisterUserDto registerUserDto) throws ServiceException;
+    void register(RegisterUserDto registerUserDto) throws ServiceException;
 
     Optional<CustomTokenDto> refresh(String refreshToken) throws ServiceException;
 
-    Optional<UserDto> getUserById(Long id) throws ServiceException;
+    Optional<UserDto> findById(Long id) throws ServiceException;
+
+    void addPhoto(MultipartFile file, Long id) throws ServiceException;
 }

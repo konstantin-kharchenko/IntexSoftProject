@@ -4,8 +4,9 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Objects;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -13,28 +14,31 @@ import java.util.Set;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "roles")
-public class Role {
+@Table(name = "loyalty_cards")
+public class LoyaltyCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "name")
-    private RoleType role;
+    @Column(name = "number")
+    private BigInteger numer;
 
-    @ManyToMany
-    @JoinTable(name = "roles_authorities", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "authority_id"))
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "percent_id")
     @ToString.Exclude
-    private Set<Authority> authority;
+    private Percent percent;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Role role = (Role) o;
-        return id != null && Objects.equals(id, role.id);
+        LoyaltyCard that = (LoyaltyCard) o;
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override

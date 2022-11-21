@@ -5,7 +5,6 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.Objects;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -13,28 +12,22 @@ import java.util.Set;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "roles")
-public class Role {
+@Table(name = "manufactures")
+public class Manufacture {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "name")
-    private RoleType role;
-
-    @ManyToMany
-    @JoinTable(name = "roles_authorities", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "authority_id"))
-    @ToString.Exclude
-    private Set<Authority> authority;
+    @JoinColumn(name = "name")
+    private String name;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Role role = (Role) o;
-        return id != null && Objects.equals(id, role.id);
+        Manufacture that = (Manufacture) o;
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override
