@@ -1,5 +1,5 @@
 package by.kharchenko.intexsoftproject.model.entity;
 
 public enum AuthorityType {
-    POST, EDIT_POST, DELETE_POST, EDIT_PROFILE, DELETE_ACCOUNT, BLOCK_ACCOUNT
+    REGISTER, CREATE_ORDER, DELETE_ORDER, EDIT_ORDER, ADD_TO_BASKET, GENERATE_CARD_NUMBER
 }

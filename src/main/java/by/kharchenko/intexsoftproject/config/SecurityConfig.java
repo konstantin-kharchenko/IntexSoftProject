@@ -17,6 +17,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 import java.util.List;
 
+import static by.kharchenko.intexsoftproject.model.entity.RoleType.ROLE_ADMINISTRATOR;
+
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtTokenProvider jwtTokenProvider;
@@ -31,8 +33,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().disable()
                 .csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/user").authenticated()
-/*                .antMatchers("/client/**").hasRole(ROLE_USER.getName())
-                .antMatchers("/post/**").hasAuthority(AuthorityType.POST.toString())*/
+                .antMatchers("/generate-card-number/**", "/create-card/**").hasRole(ROLE_ADMINISTRATOR.getName())
+ /*               .antMatchers("/post/**").hasAuthority(AuthorityType.POST.toString())*/
                 .and()
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(), jwtTokenProvider));
         http.logout()

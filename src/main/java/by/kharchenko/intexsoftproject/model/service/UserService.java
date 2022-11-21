@@ -1,10 +1,7 @@
 package by.kharchenko.intexsoftproject.model.service;
 
 import by.kharchenko.intexsoftproject.exception.ServiceException;
-import by.kharchenko.intexsoftproject.model.dto.CustomTokenDto;
-import by.kharchenko.intexsoftproject.model.dto.RegisterUserDto;
-import by.kharchenko.intexsoftproject.model.dto.SignInUserDto;
-import by.kharchenko.intexsoftproject.model.dto.UserDto;
+import by.kharchenko.intexsoftproject.model.dto.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
@@ -19,4 +16,6 @@ public interface UserService {
     Optional<UserDto> findById(Long id) throws ServiceException;
 
     void addPhoto(MultipartFile file, Long id) throws ServiceException;
+
+    void generateNumber(GenerateCardUserDto generateCardUserDto) throws ServiceException;
 }
