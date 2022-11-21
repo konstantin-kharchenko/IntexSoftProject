@@ -10,7 +10,7 @@
 + Authorization
 
 ### Below is the schema of the tables in my database
-![изображение](https://user-images.githubusercontent.com/51529773/202849371-a67634c6-3bad-42d1-a32a-fd21ce08ca11.png)
+![изображение](https://user-images.githubusercontent.com/51529773/203035841-dea44199-bc0a-43d6-bdae-c63c03ac6a9f.png)
 
 ### Applied technologies:
 + Spring Core
