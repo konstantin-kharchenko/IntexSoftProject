@@ -10,7 +10,7 @@
 			"name": "Auth",
 			"item": [
 				{
-					"name": "Login",
+					"name": "AdminLogin",
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -19,7 +19,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\":\"kostya\",\r\n    \"password\": \"BPpb23-=\"\r\n}",
+							"raw": "{\r\n    \"data\":\"admin\",\r\n    \"password\": \"BPpb23-=\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -77,6 +77,29 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "UserLogin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\":\"kostya\",\r\n    \"password\": \"BPpb23-=\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}sign-in",
+							"host": [
+								"{{domain}}sign-in"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -90,7 +113,7 @@
 						"header": [
 							{
 								"key": "Access-Token",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjY4NjIzNDEzLCJleHAiOjE2Njg2MjQzMTMsInJvbGVzIjpbeyJpZCI6MSwicm9sZSI6IlJPTEVfVVNFUiIsImF1dGhvcml0eSI6W3siaWQiOjEsImF1dGhvcml0eSI6IlBPU1QifV19XX0.RrUHUw3GCOot0mnkPQkdn62Z8yoQaAhOGBwV5Avf1WJupth6WbYCs7g9t_B8sQ9qjbRmm3ipk9MgqGNcq5F1Cw",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjY5MDM5ODAxLCJleHAiOjE2NjkwNDA3MDEsInJvbGVzIjpbeyJpZCI6MSwicm9sZSI6IlJPTEVfVVNFUiIsImF1dGhvcml0eSI6W3siaWQiOjEsImF1dGhvcml0eSI6IlJFR0lTVEVSIn0seyJpZCI6MiwiYXV0aG9yaXR5IjoiQ1JFQVRFX09SREVSIn0seyJpZCI6MywiYXV0aG9yaXR5IjoiREVMRVRFX09SREVSIn0seyJpZCI6NCwiYXV0aG9yaXR5IjoiRURJVF9PUkRFUiJ9LHsiaWQiOjUsImF1dGhvcml0eSI6IkFERF9UT19CQVNLRVQifV19XX0.BpYAqAAkKfxjbnGwcuo4W9lkjLsJKWqBgdzvZ-lwL6g06EIgycAEHlDr9M053cICo4W777M-ifodEgWk5N79oA",
 								"type": "text"
 							}
 						],
@@ -105,6 +128,89 @@
 									"value": "",
 									"disabled": true
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Admin",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Access-Token",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjY5MDM4MDg5LCJleHAiOjE2NjkwMzg5ODksInJvbGVzIjpbeyJpZCI6MSwicm9sZSI6IlJPTEVfVVNFUiIsImF1dGhvcml0eSI6W3siaWQiOjEsImF1dGhvcml0eSI6IlJFR0lTVEVSIn0seyJpZCI6MiwiYXV0aG9yaXR5IjoiQ1JFQVRFX09SREVSIn0seyJpZCI6MywiYXV0aG9yaXR5IjoiREVMRVRFX09SREVSIn0seyJpZCI6NCwiYXV0aG9yaXR5IjoiRURJVF9PUkRFUiJ9LHsiaWQiOjUsImF1dGhvcml0eSI6IkFERF9UT19CQVNLRVQifV19LHsiaWQiOjIsInJvbGUiOiJST0xFX0FETUlOSVNUUkFUT1IiLCJhdXRob3JpdHkiOlt7ImlkIjoxLCJhdXRob3JpdHkiOiJSRUdJU1RFUiJ9LHsiaWQiOjYsImF1dGhvcml0eSI6IkdFTkVSQVRFX0NBUkRfTlVNQkVSIn1dfV19.xLZvhwn7i3lr8_v1I4EEdB4VxS33nOSdbTOaM4K1Wn-aRiI5DwpcF7lKLZ226xXwkEwtZQJjFD62sRlbTk3Q8Q",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}user",
+							"host": [
+								"{{domain}}user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GenerateCardNumber",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Access-Token",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjY5MDM5ODAxLCJleHAiOjE2NjkwNDA3MDEsInJvbGVzIjpbeyJpZCI6MSwicm9sZSI6IlJPTEVfVVNFUiIsImF1dGhvcml0eSI6W3siaWQiOjEsImF1dGhvcml0eSI6IlJFR0lTVEVSIn0seyJpZCI6MiwiYXV0aG9yaXR5IjoiQ1JFQVRFX09SREVSIn0seyJpZCI6MywiYXV0aG9yaXR5IjoiREVMRVRFX09SREVSIn0seyJpZCI6NCwiYXV0aG9yaXR5IjoiRURJVF9PUkRFUiJ9LHsiaWQiOjUsImF1dGhvcml0eSI6IkFERF9UT19CQVNLRVQifV19XX0.BpYAqAAkKfxjbnGwcuo4W9lkjLsJKWqBgdzvZ-lwL6g06EIgycAEHlDr9M053cICo4W777M-ifodEgWk5N79oA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"konhar2002@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}generate-card-number",
+							"host": [
+								"{{domain}}generate-card-number"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateCard",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Access-Token",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjY5MDM5Njg3LCJleHAiOjE2NjkwNDA1ODcsInJvbGVzIjpbeyJpZCI6MSwicm9sZSI6IlJPTEVfVVNFUiIsImF1dGhvcml0eSI6W3siaWQiOjEsImF1dGhvcml0eSI6IlJFR0lTVEVSIn0seyJpZCI6MiwiYXV0aG9yaXR5IjoiQ1JFQVRFX09SREVSIn0seyJpZCI6MywiYXV0aG9yaXR5IjoiREVMRVRFX09SREVSIn0seyJpZCI6NCwiYXV0aG9yaXR5IjoiRURJVF9PUkRFUiJ9LHsiaWQiOjUsImF1dGhvcml0eSI6IkFERF9UT19CQVNLRVQifV19LHsiaWQiOjIsInJvbGUiOiJST0xFX0FETUlOSVNUUkFUT1IiLCJhdXRob3JpdHkiOlt7ImlkIjoxLCJhdXRob3JpdHkiOiJSRUdJU1RFUiJ9LHsiaWQiOjYsImF1dGhvcml0eSI6IkdFTkVSQVRFX0NBUkRfTlVNQkVSIn1dfV19.7bxPQJoZulccWJ_8gz1MkRF_ECec2RxyXTlAH2kglnyBCfduprzXwWLjvozBgfFNkvo0Z4rjEIfa_ez46OTAKg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"konhar2002@gmail.com\",\r\n    \"number\":\"2135760035\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}create-card",
+							"host": [
+								"{{domain}}create-card"
 							]
 						}
 					},
