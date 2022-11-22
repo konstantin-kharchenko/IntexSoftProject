@@ -4,12 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigInteger;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CardNumberDto {
-    private String email;
-    private String number;
+public class ProductPageDto {
+    private int page;
+    private int countItemInPage;
 }

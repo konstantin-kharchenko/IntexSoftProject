@@ -41,6 +41,10 @@ public class User {
     @ToString.Exclude
     private LoyaltyCard loyaltyCard;
 
+    @OneToOne(mappedBy = "user")
+    @ToString.Exclude
+    private CardNumber cardNumber;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "baskets", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
     @ToString.Exclude

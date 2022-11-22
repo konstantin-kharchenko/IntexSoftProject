@@ -17,5 +17,4 @@ public interface UserService {
 
     void addPhoto(MultipartFile file, Long id) throws ServiceException;
 
-    void generateNumber(GenerateCardUserDto generateCardUserDto) throws ServiceException;
 }

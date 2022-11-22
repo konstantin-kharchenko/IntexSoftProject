@@ -150,6 +150,8 @@
             <column name="manufacture_id" type="int">
                 <constraints nullable="false"/>
             </column>
+            <column name="availability" type="boolean" defaultValue="true">
+            </column>
             <column name="price" type="decimal">
                 <constraints nullable="false"/>
             </column>
@@ -325,7 +327,7 @@
             <column name="id" type="int" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="number" type="bigint">
+            <column name="card_number_id" type="int">
                 <constraints nullable="false"/>
             </column>
             <column name="user_id" type="int">
@@ -335,6 +337,46 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+    </changeSet>
+
+    <changeSet id="create-table-card_numbers" author="postgres">
+        <createTable tableName="card_numbers">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="number" type="varchar(60)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="add-foreign-key-card_numbers-user" author="postgres">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="card_numbers"
+                                 baseTableSchemaName="public"
+                                 constraintName="fk_user_id"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"
+                                 referencedTableSchemaName="public"
+        />
+    </changeSet>
+
+    <changeSet id="add-foreign-key-loyalty_cards-card_numbers" author="postgres">
+        <addForeignKeyConstraint baseColumnNames="card_number_id"
+                                 baseTableName="loyalty_cards"
+                                 baseTableSchemaName="public"
+                                 constraintName="fk_card_number_id"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 referencedColumnNames="id"
+                                 referencedTableName="card_numbers"
+                                 referencedTableSchemaName="public"
+        />
     </changeSet>
 
     <changeSet id="add-foreign-key-loyalty_cards-percents" author="postgres">

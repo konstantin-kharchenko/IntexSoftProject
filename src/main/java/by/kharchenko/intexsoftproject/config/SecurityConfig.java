@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().disable()
                 .csrf().disable().authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/user").authenticated()
+                .antMatchers(HttpMethod.GET, "/user", "/products").authenticated()
                 .antMatchers("/generate-card-number/**", "/create-card/**").hasRole(ROLE_ADMINISTRATOR.getName())
  /*               .antMatchers("/post/**").hasAuthority(AuthorityType.POST.toString())*/
                 .and()

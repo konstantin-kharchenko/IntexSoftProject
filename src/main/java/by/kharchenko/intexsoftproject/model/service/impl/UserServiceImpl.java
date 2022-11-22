@@ -1,7 +1,10 @@
 package by.kharchenko.intexsoftproject.model.service.impl;
 
 import by.kharchenko.intexsoftproject.exception.ServiceException;
-import by.kharchenko.intexsoftproject.model.dto.*;
+import by.kharchenko.intexsoftproject.model.dto.CustomTokenDto;
+import by.kharchenko.intexsoftproject.model.dto.RegisterUserDto;
+import by.kharchenko.intexsoftproject.model.dto.SignInUserDto;
+import by.kharchenko.intexsoftproject.model.dto.UserDto;
 import by.kharchenko.intexsoftproject.model.entity.Role;
 import by.kharchenko.intexsoftproject.model.entity.RoleType;
 import by.kharchenko.intexsoftproject.model.entity.User;
@@ -139,19 +142,6 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException("file have to picture");
         } catch (IOException e) {
             throw new ServiceException(e);
-        }
-    }
-
-    @Override
-    public void generateNumber(GenerateCardUserDto generateCardUserDto) throws ServiceException {
-        Optional<User> user = userRepository.findByEmail(generateCardUserDto.getEmail());
-        if (user.isPresent()) {
-            Integer number = user.get().hashCode();
-            mailSender.sendCustomEmail(generateCardUserDto.getEmail(), "CARD NUMBER", "Hello, your card number is: " + number);
-        }
-        else {
-            log.info("user with this email not found");
-            throw new ServiceException("user with this email not found");
         }
     }
 }

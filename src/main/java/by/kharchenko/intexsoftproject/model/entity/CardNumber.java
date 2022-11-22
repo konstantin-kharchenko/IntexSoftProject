@@ -4,8 +4,6 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Objects;
 
 @Getter
@@ -14,32 +12,25 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "loyalty_cards")
-public class LoyaltyCard {
+@Table(name = "card_numbers")
+public class CardNumber {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "card_number_id", referencedColumnName = "id")
-    @ToString.Exclude
-    private CardNumber cardNumber;
+    @Column(name = "number", nullable = false)
+    private String number;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "percent_id")
-    @ToString.Exclude
-    private Percent percent;
+    User user;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        LoyaltyCard that = (LoyaltyCard) o;
+        CardNumber that = (CardNumber) o;
         return id != null && Objects.equals(id, that.id);
     }
 

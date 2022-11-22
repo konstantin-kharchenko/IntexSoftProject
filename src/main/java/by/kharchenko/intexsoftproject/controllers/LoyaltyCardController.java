@@ -18,8 +18,6 @@ import javax.validation.Valid;
 @RestController
 @AllArgsConstructor
 public class LoyaltyCardController {
-
-    private final UserService userService;
     private final CardService cardService;
 
     @PostMapping("/generate-card-number")
@@ -28,7 +26,7 @@ public class LoyaltyCardController {
             return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.BAD_REQUEST);
         }
         try {
-            userService.generateNumber(generateCardUserDto);
+            cardService.generateNumber(generateCardUserDto);
         } catch (ServiceException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }

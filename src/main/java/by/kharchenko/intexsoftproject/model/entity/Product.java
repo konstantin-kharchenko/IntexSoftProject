@@ -33,6 +33,9 @@ public class Product {
     @Column(name = "price")
     private BigDecimal price;
 
+    @Column(name = "availability")
+    private boolean availability;
+
     @ManyToOne
     @JoinColumn(name = "manufacture_id")
     @ToString.Exclude
