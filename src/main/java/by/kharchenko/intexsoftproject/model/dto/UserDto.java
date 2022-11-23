@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Set;
 
@@ -19,5 +20,5 @@ public class UserDto {
     @JsonProperty("email")
     private String email;
 
-    private String photo;
+    private byte[] photo;
 }

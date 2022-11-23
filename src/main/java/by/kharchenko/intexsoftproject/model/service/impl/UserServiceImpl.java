@@ -115,8 +115,8 @@ public class UserServiceImpl implements UserService {
             User user = optionalUser.get();
             UserDto userDto = UserMapper.INSTANCE.userToUserDto(user);
             if (user.getPhotoPath() != null) {
-                String stringPhoto = readerWriter.readPhoto(user.getPhotoPath());
-               userDto.setPhoto(stringPhoto);
+                byte[] file = readerWriter.readFile(user.getPhotoPath());
+               userDto.setPhoto(file);
             }
             return Optional.of(userDto);
         }
@@ -133,7 +133,7 @@ public class UserServiceImpl implements UserService {
                 byte[] photoBytes = file.getBytes();
                 String userPhoto = CustomPictureEncoder.arrayToBase64(photoBytes);
                 String path = PHOTO_PATH_ON_HDD + id + FILE_EXTENSION;
-                boolean isWrite = readerWriter.writePhoto(userPhoto, path);
+                boolean isWrite = readerWriter.saveFile(file, path);
                 if (isWrite) {
                     userRepository.savePhoto(path, id);
                 }

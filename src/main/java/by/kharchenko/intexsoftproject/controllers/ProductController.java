@@ -2,7 +2,6 @@ package by.kharchenko.intexsoftproject.controllers;
 
 import by.kharchenko.intexsoftproject.exception.ServiceException;
 import by.kharchenko.intexsoftproject.model.dto.ProductPageDto;
-import by.kharchenko.intexsoftproject.model.dto.SignInUserDto;
 import by.kharchenko.intexsoftproject.model.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
