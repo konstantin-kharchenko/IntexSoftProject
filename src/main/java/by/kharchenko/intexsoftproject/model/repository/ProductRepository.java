@@ -1,14 +1,14 @@
 package by.kharchenko.intexsoftproject.model.repository;
 
 import by.kharchenko.intexsoftproject.model.entity.Product;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
-
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpecificationExecutor<Product> {
 
     @Query(value = "select p from Product p where p.availability = true order by p.name")
-    List<Product> findByCurrentPage(Pageable pageable);
+    Page<Product> findByCurrentPage(Pageable pageable);
 }

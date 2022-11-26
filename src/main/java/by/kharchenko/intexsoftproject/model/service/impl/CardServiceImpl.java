@@ -32,7 +32,6 @@ public class CardServiceImpl implements CardService {
     private final CustomMailSender mailSender;
 
 
-
     @Override
     public void generateNumber(GenerateCardUserDto generateCardUserDto) throws ServiceException {
         Optional<User> user = userRepository.findByEmail(generateCardUserDto.getEmail());
@@ -43,8 +42,7 @@ public class CardServiceImpl implements CardService {
             cardNumber.setUser(user.get());
             cardNumberRepository.save(cardNumber);
             mailSender.sendCustomEmail(generateCardUserDto.getEmail(), "CARD NUMBER", "Hello, your card number is: " + uuid);
-        }
-        else {
+        } else {
             log.info("user with this email not found");
             throw new ServiceException("user with this email not found");
         }

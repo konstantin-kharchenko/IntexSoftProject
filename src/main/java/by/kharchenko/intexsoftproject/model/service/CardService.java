@@ -6,5 +6,6 @@ import by.kharchenko.intexsoftproject.model.dto.GenerateCardUserDto;
 
 public interface CardService {
     void generateNumber(GenerateCardUserDto generateCardUserDto) throws ServiceException;
+
     void addCard(CardNumberDto cardNumberDto) throws ServiceException;
 }

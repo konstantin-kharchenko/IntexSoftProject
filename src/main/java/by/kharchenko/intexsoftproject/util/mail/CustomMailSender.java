@@ -16,7 +16,7 @@ public class CustomMailSender {
     private final MailSender mailSender;
 
     @Autowired
-    public CustomMailSender(@Qualifier(value = "mailSender")MailSender mailSender) {
+    public CustomMailSender(@Qualifier(value = "mailSender") MailSender mailSender) {
         this.mailSender = mailSender;
     }
 

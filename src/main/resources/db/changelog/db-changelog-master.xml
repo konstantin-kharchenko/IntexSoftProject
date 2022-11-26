@@ -18,7 +18,7 @@
             <column name="email" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="photo_path" type="varchar(100)">
+            <column name="photo_name" type="varchar(100)">
                 <constraints nullable="true"/>
             </column>
         </createTable>
@@ -141,10 +141,10 @@
             <column name="name" type="varchar(64)">
                 <constraints nullable="false"/>
             </column>
-            <column name="photo_path" type="varchar(64)">
+            <column name="photo_name" type="varchar(64)">
                 <constraints nullable="false"/>
             </column>
-            <column name="instruction_path" type="varchar(64)">
+            <column name="instruction_name" type="varchar(64)">
                 <constraints nullable="false"/>
             </column>
             <column name="manufacture_id" type="int">
@@ -510,6 +510,14 @@
         </insert>
     </changeSet>
 
+    <changeSet id="02" author="postgres">
+        <insert tableName="users">
+            <column name="username">kostya</column>
+            <column name="password">-2712-119102118199710449-11510540-7882-121-99</column>
+            <column name="email">konhar2002@gmail.com</column>
+        </insert>
+    </changeSet>
+
     <changeSet id="users_roles_01" author="postgres">
         <insert tableName="users_roles">
             <column name="user_id">1</column>
@@ -524,11 +532,101 @@
         </insert>
     </changeSet>
 
+    <changeSet id="users_roles_03" author="postgres">
+        <insert tableName="users_roles">
+            <column name="user_id">2</column>
+            <column name="role_id">1</column>
+        </insert>
+    </changeSet>
+
     <changeSet id="percent_01" author="postgres">
         <insert tableName="percents">
             <column name="min_price">0</column>
             <column name="max_price">20</column>
             <column name="percent">3</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="manufacture_01" author="postgres">
+        <insert tableName="manufactures">
+            <column name="name">Germany</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="product_01" author="postgres">
+        <insert tableName="products">
+            <column name="name">Wobenzym1</column>
+            <column name="photo_name">1.png</column>
+            <column name="instruction_name">1.pdf</column>
+            <column name="manufacture_id">1</column>
+            <column name="availability">true</column>
+            <column name="price">100</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="product_02" author="postgres">
+        <insert tableName="products">
+            <column name="name">Wobenzym2</column>
+            <column name="photo_name">1.png</column>
+            <column name="instruction_name">1.pdf</column>
+            <column name="manufacture_id">1</column>
+            <column name="availability">true</column>
+            <column name="price">100</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="product_03" author="postgres">
+        <insert tableName="products">
+            <column name="name">Wobenzym3</column>
+            <column name="photo_name">1.png</column>
+            <column name="instruction_name">1.pdf</column>
+            <column name="manufacture_id">1</column>
+            <column name="availability">true</column>
+            <column name="price">100</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="product_04" author="postgres">
+        <insert tableName="products">
+            <column name="name">Wobenzym4</column>
+            <column name="photo_name">1.png</column>
+            <column name="instruction_name">1.pdf</column>
+            <column name="manufacture_id">1</column>
+            <column name="availability">true</column>
+            <column name="price">100</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="product_05" author="postgres">
+        <insert tableName="products">
+            <column name="name">Wobenzym5</column>
+            <column name="photo_name">1.png</column>
+            <column name="instruction_name">1.pdf</column>
+            <column name="manufacture_id">1</column>
+            <column name="availability">true</column>
+            <column name="price">100</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="product_06" author="postgres">
+        <insert tableName="products">
+            <column name="name">Azitromizin</column>
+            <column name="photo_name">1.png</column>
+            <column name="instruction_name">1.pdf</column>
+            <column name="manufacture_id">1</column>
+            <column name="availability">true</column>
+            <column name="price">100</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="product_07" author="postgres">
+        <insert tableName="products">
+            <column name="name">Wobenzym7</column>
+            <column name="photo_name">1.png</column>
+            <column name="instruction_name">1.pdf</column>
+            <column name="manufacture_id">1</column>
+            <column name="availability">true</column>
+            <column name="price">100</column>
         </insert>
     </changeSet>
 

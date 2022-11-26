@@ -30,8 +30,8 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "photo_path")
-    private String photoPath;
+    @Column(name = "photo_name")
+    private String photoName;
 
     @OneToMany(mappedBy = "user")
     @ToString.Exclude

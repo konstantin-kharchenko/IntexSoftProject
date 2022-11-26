@@ -2,12 +2,14 @@ package by.kharchenko.intexsoftproject.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
-public class ProductPageDto {
+public class PaginationDataDto {
+    private List<ProductListDto> productListDtoList;
     private int page;
-    private int countItemInPage;
+    private int limit;
+    private int total;
 }

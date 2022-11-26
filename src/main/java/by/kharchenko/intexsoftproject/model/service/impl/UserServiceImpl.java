@@ -5,44 +5,65 @@ import by.kharchenko.intexsoftproject.model.dto.CustomTokenDto;
 import by.kharchenko.intexsoftproject.model.dto.RegisterUserDto;
 import by.kharchenko.intexsoftproject.model.dto.SignInUserDto;
 import by.kharchenko.intexsoftproject.model.dto.UserDto;
+import by.kharchenko.intexsoftproject.model.entity.Product;
 import by.kharchenko.intexsoftproject.model.entity.Role;
 import by.kharchenko.intexsoftproject.model.entity.RoleType;
 import by.kharchenko.intexsoftproject.model.entity.User;
 import by.kharchenko.intexsoftproject.model.mapper.UserMapper;
+import by.kharchenko.intexsoftproject.model.repository.ProductRepository;
 import by.kharchenko.intexsoftproject.model.repository.RoleRepository;
 import by.kharchenko.intexsoftproject.model.repository.UserRepository;
 import by.kharchenko.intexsoftproject.model.service.UserService;
 import by.kharchenko.intexsoftproject.security.JwtTokenProvider;
 import by.kharchenko.intexsoftproject.security.JwtType;
-import by.kharchenko.intexsoftproject.util.encryption.CustomPictureEncoder;
 import by.kharchenko.intexsoftproject.util.encryption.EncryptionPassword;
 import by.kharchenko.intexsoftproject.util.filereadwrite.FileReaderWriter;
 import by.kharchenko.intexsoftproject.util.mail.CustomMailSender;
 import by.kharchenko.intexsoftproject.util.validator.PhotoValidator;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FilenameUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
 @Service
-@AllArgsConstructor
 @Slf4j
 public class UserServiceImpl implements UserService {
 
-    public static final String PHOTO_PATH_ON_HDD = "D:\\FINAL_PROJECT\\PHOTO\\CLIENT\\";
-    private static final String FILE_EXTENSION = ".txt";
+
+    private final String photoPath;
     private final FileReaderWriter readerWriter;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final ProductRepository productRepository;
     private final CustomMailSender mailSender;
     private final JwtTokenProvider jwtTokenProvider;
     private final PhotoValidator photoValidator;
+
+    public UserServiceImpl(@Value("${user.photo.path}") String photoPath
+            , FileReaderWriter readerWriter
+            , UserRepository userRepository
+            , RoleRepository roleRepository
+            , ProductRepository productRepository
+            , CustomMailSender mailSender
+            , JwtTokenProvider jwtTokenProvider
+            , PhotoValidator photoValidator) {
+        this.photoPath = photoPath;
+        this.readerWriter = readerWriter;
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.productRepository = productRepository;
+        this.mailSender = mailSender;
+        this.jwtTokenProvider = jwtTokenProvider;
+        this.photoValidator = photoValidator;
+    }
 
     @Override
     public Optional<CustomTokenDto> signIn(SignInUserDto signInUserDto) throws ServiceException {
@@ -114,9 +135,9 @@ public class UserServiceImpl implements UserService {
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             UserDto userDto = UserMapper.INSTANCE.userToUserDto(user);
-            if (user.getPhotoPath() != null) {
-                byte[] file = readerWriter.readFile(user.getPhotoPath());
-               userDto.setPhoto(file);
+            if (user.getPhotoName() != null) {
+                Resource resource = readerWriter.readFile(photoPath, user.getPhotoName());
+                userDto.setPhoto(resource);
             }
             return Optional.of(userDto);
         }
@@ -125,23 +146,35 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void addPhoto(MultipartFile file, Long id) throws ServiceException {
-        try {
-            String name = file.getOriginalFilename();
-            boolean isCorrect = photoValidator.isCorrect(name);
-            if (isCorrect) {
-                byte[] photoBytes = file.getBytes();
-                String userPhoto = CustomPictureEncoder.arrayToBase64(photoBytes);
-                String path = PHOTO_PATH_ON_HDD + id + FILE_EXTENSION;
-                boolean isWrite = readerWriter.saveFile(file, path);
-                if (isWrite) {
-                    userRepository.savePhoto(path, id);
-                }
+        String name = file.getOriginalFilename();
+        boolean isCorrect = photoValidator.isCorrect(name);
+        if (isCorrect) {
+            String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+            String fileName = id.toString() + "." + extension;
+            boolean isWrite = readerWriter.saveFile(file, photoPath, fileName);
+            if (isWrite) {
+                userRepository.savePhoto(fileName, id);
             }
+        } else {
             log.info("file have to picture");
             throw new ServiceException("file have to picture");
-        } catch (IOException e) {
-            throw new ServiceException(e);
         }
+    }
+
+    @Override
+    public void addToBasket(Long id, Long userId) throws ServiceException {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        User user = optionalUser.get();
+        Optional<Product> product = productRepository.findById(id);
+        if (product.isPresent()) {
+            user.getProducts().add(product.get());
+            userRepository.save(user);
+        }
+        else {
+            throw new ServiceException("Product with this id not find");
+        }
+
     }
 }

@@ -5,7 +5,7 @@ import by.kharchenko.intexsoftproject.exception.ServiceException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class EncryptionPassword{
+public class EncryptionPassword {
 
     private static final String ENCRYPTION_TYPE = "MD5";
 

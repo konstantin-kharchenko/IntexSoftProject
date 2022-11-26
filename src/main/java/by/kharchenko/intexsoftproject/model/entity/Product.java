@@ -24,11 +24,11 @@ public class Product {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "photo_path")
-    private String photoPath;
+    @Column(name = "photo_name")
+    private String photoName;
 
-    @Column(name = "instruction_path")
-    private String instructionPath;
+    @Column(name = "instruction_name")
+    private String instructionName;
 
     @Column(name = "price")
     private BigDecimal price;

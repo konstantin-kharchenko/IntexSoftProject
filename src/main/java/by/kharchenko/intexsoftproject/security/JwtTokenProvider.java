@@ -22,7 +22,7 @@ public class JwtTokenProvider {
 
 
     @Autowired
-    public JwtTokenProvider(@Value("${jwt.token.access.secret-key}") String accessSecret, @Value("${jwt.token.refresh.secret-key}") String refreshSecret, @Value("${lifetime.access.token}")  long lifetimeAccessToken, @Value("${lifetime.refresh.token}") long lifetimeRefreshToken) {
+    public JwtTokenProvider(@Value("${jwt.token.access.secret-key}") String accessSecret, @Value("${jwt.token.refresh.secret-key}") String refreshSecret, @Value("${lifetime.access.token}") long lifetimeAccessToken, @Value("${lifetime.refresh.token}") long lifetimeRefreshToken) {
         this.accessSecret = Base64.getEncoder().encodeToString(accessSecret.getBytes());
         this.refreshSecret = Base64.getEncoder().encodeToString(refreshSecret.getBytes());
         this.lifetimeAccessToken = lifetimeAccessToken;

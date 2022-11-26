@@ -17,4 +17,5 @@ public interface UserService {
 
     void addPhoto(MultipartFile file, Long id) throws ServiceException;
 
+    void addToBasket(Long id, Long userId) throws ServiceException;
 }
