@@ -5,9 +5,10 @@ import by.kharchenko.intexsoftproject.exception.ServiceException;
 import by.kharchenko.intexsoftproject.model.dto.UserDto;
 import by.kharchenko.intexsoftproject.model.service.UserService;
 import by.kharchenko.intexsoftproject.security.JwtAuthentication;
+import by.kharchenko.intexsoftproject.util.validator.PhotoValidator;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,29 +18,21 @@ import java.util.Optional;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends AbstractController {
 
     private UserService userService;
 
     @GetMapping("")
-    public ResponseEntity getUser() throws ServiceException {
+    public ResponseEntity<UserDto> getUser() throws ServiceException {
         Long id = ((JwtAuthentication) SecurityContextHolder.getContext().getAuthentication()).getUserId();
         Optional<UserDto> optionalUserDto = userService.findById(id);
         return ResponseEntity.ok(optionalUserDto.get());
     }
 
     @PostMapping("/photo")
-    public ResponseEntity photo(@RequestParam("file") MultipartFile file) {
-        try {
-            if (file.isEmpty()) {
-                return new ResponseEntity<>("File is empty", HttpStatus.BAD_REQUEST);
-            }
-            Long id = ((JwtAuthentication) SecurityContextHolder.getContext().getAuthentication()).getUserId();
-            userService.addPhoto(file, id);
-        } catch (ServiceException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-        return ResponseEntity.ok().build();
+    public void photo(@RequestParam("file") MultipartFile file) throws ServiceException {
+        Long id = ((JwtAuthentication) SecurityContextHolder.getContext().getAuthentication()).getUserId();
+        userService.addPhoto(file, id);
     }
 
 }

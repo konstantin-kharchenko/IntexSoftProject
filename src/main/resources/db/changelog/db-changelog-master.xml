@@ -10,13 +10,13 @@
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="username" type="varchar(20)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="password" type="varchar(100)">
                 <constraints nullable="false"/>
             </column>
             <column name="email" type="varchar(50)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="photo_name" type="varchar(100)">
                 <constraints nullable="true"/>
@@ -30,7 +30,7 @@
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="name" type="varchar(64)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
         </createTable>
     </changeSet>
@@ -52,6 +52,7 @@
                                  baseTableSchemaName="public"
                                  constraintName="fk_role_id"
                                  deferrable="true"
+                                 deleteCascade="true"
                                  initiallyDeferred="true"
                                  referencedColumnNames="id"
                                  referencedTableName="roles"
@@ -65,6 +66,7 @@
                                  baseTableSchemaName="public"
                                  constraintName="fk_user_id"
                                  deferrable="true"
+                                 deleteCascade="true"
                                  initiallyDeferred="true"
                                  referencedColumnNames="id"
                                  referencedTableName="users"
@@ -80,7 +82,7 @@
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="name" type="varchar(64)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
         </createTable>
     </changeSet>
@@ -102,6 +104,7 @@
                                  baseTableSchemaName="public"
                                  constraintName="fk_role_id"
                                  deferrable="true"
+                                 deleteCascade="true"
                                  initiallyDeferred="true"
                                  referencedColumnNames="id"
                                  referencedTableName="roles"
@@ -115,6 +118,7 @@
                                  baseTableSchemaName="public"
                                  constraintName="fk_authority_id"
                                  deferrable="true"
+                                 deleteCascade="true"
                                  initiallyDeferred="true"
                                  referencedColumnNames="id"
                                  referencedTableName="authorities"
@@ -128,7 +132,7 @@
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="name" type="varchar(64)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
         </createTable>
     </changeSet>
@@ -139,7 +143,7 @@
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="name" type="varchar(64)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="photo_name" type="varchar(64)">
                 <constraints nullable="false"/>
@@ -164,6 +168,7 @@
                                  baseTableSchemaName="public"
                                  constraintName="fk_manufacture_id"
                                  deferrable="true"
+                                 deleteCascade="true"
                                  initiallyDeferred="true"
                                  referencedColumnNames="id"
                                  referencedTableName="manufactures"
@@ -188,6 +193,7 @@
                                  baseTableSchemaName="public"
                                  constraintName="fk_user_id"
                                  deferrable="true"
+                                 deleteCascade="true"
                                  initiallyDeferred="true"
                                  referencedColumnNames="id"
                                  referencedTableName="users"
@@ -201,6 +207,7 @@
                                  baseTableSchemaName="public"
                                  constraintName="fk_product_id"
                                  deferrable="true"
+                                 deleteCascade="true"
                                  initiallyDeferred="true"
                                  referencedColumnNames="id"
                                  referencedTableName="products"
@@ -220,7 +227,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="date" type="datetime">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="number" type="bigint">
                 <constraints nullable="false"/>
@@ -234,6 +241,7 @@
                                  baseTableSchemaName="public"
                                  constraintName="fk_user_id"
                                  deferrable="true"
+                                 deleteCascade="true"
                                  initiallyDeferred="true"
                                  referencedColumnNames="id"
                                  referencedTableName="users"
@@ -258,6 +266,7 @@
                                  baseTableSchemaName="public"
                                  constraintName="fk_order_id"
                                  deferrable="true"
+                                 deleteCascade="true"
                                  initiallyDeferred="true"
                                  referencedColumnNames="id"
                                  referencedTableName="orders"
@@ -271,6 +280,7 @@
                                  baseTableSchemaName="public"
                                  constraintName="fk_product_id"
                                  deferrable="true"
+                                 deleteCascade="true"
                                  initiallyDeferred="true"
                                  referencedColumnNames="id"
                                  referencedTableName="products"
@@ -298,6 +308,7 @@
                                  baseTableSchemaName="public"
                                  constraintName="fk_user_id"
                                  deferrable="true"
+                                 deleteCascade="true"
                                  initiallyDeferred="true"
                                  referencedColumnNames="id"
                                  referencedTableName="users"
@@ -317,7 +328,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="percent" type="int">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
         </createTable>
     </changeSet>
@@ -359,6 +370,7 @@
                                  baseTableSchemaName="public"
                                  constraintName="fk_user_id"
                                  deferrable="true"
+                                 deleteCascade="true"
                                  initiallyDeferred="true"
                                  referencedColumnNames="id"
                                  referencedTableName="users"
@@ -372,6 +384,7 @@
                                  baseTableSchemaName="public"
                                  constraintName="fk_card_number_id"
                                  deferrable="true"
+                                 deleteCascade="true"
                                  initiallyDeferred="true"
                                  referencedColumnNames="id"
                                  referencedTableName="card_numbers"
@@ -385,6 +398,7 @@
                                  baseTableSchemaName="public"
                                  constraintName="fk_percent_id"
                                  deferrable="true"
+                                 deleteCascade="true"
                                  initiallyDeferred="true"
                                  referencedColumnNames="id"
                                  referencedTableName="percents"
@@ -397,6 +411,7 @@
                                  baseTableName="loyalty_cards"
                                  baseTableSchemaName="public"
                                  constraintName="fk_user_id"
+                                 deleteCascade="true"
                                  deferrable="true"
                                  initiallyDeferred="true"
                                  referencedColumnNames="id"

@@ -17,6 +17,6 @@ public class SignInUserDto {
     private String data;
 
     @NotEmpty(message = "password must not be empty")
-    @Pattern(regexp = ".*[A-Za-z.-_*].*", message = "Invalid")
+    @Pattern(regexp = "^[^!#$%^&*()_\\s]*$", message = "Invalid")
     private String password;
 }

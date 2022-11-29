@@ -1,6 +1,7 @@
 package by.kharchenko.intexsoftproject.model.entity;
 
 import lombok.*;
+import org.checkerframework.common.aliasing.qual.Unique;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -21,13 +22,13 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
 
     @Column(name = "password")
     private String password;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "photo_name")

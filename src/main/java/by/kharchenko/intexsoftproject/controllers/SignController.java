@@ -1,14 +1,14 @@
 package by.kharchenko.intexsoftproject.controllers;
 
+import by.kharchenko.intexsoftproject.exception.ExistsException;
 import by.kharchenko.intexsoftproject.exception.ServiceException;
 import by.kharchenko.intexsoftproject.model.dto.CustomTokenDto;
 import by.kharchenko.intexsoftproject.model.dto.RegisterUserDto;
 import by.kharchenko.intexsoftproject.model.dto.SignInUserDto;
 import by.kharchenko.intexsoftproject.model.service.UserService;
+import by.kharchenko.intexsoftproject.util.validator.UserValidator;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,45 +17,32 @@ import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
-public class SignController {
+public class SignController extends AbstractController {
 
     private static final String REFRESH_TOKEN = "Refresh-Token";
 
     private final UserService userService;
+    private final UserValidator userValidator;
 
     @PostMapping("/sign-in")
-    public ResponseEntity signIn(@Valid @RequestBody SignInUserDto signInUserDto, BindingResult bindingResult) throws ServiceException {
-        if (bindingResult.hasErrors()) {
-            return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.BAD_REQUEST);
-        }
-        try {
-            Optional<CustomTokenDto> optionalCustomTokenDto = userService.signIn(signInUserDto);
-            return ResponseEntity.ok(optionalCustomTokenDto.get());
-        } catch (ServiceException | UsernameNotFoundException exception) {
-            return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<CustomTokenDto> signIn(@Valid @RequestBody SignInUserDto signInUserDto) throws ServiceException {
+        Optional<CustomTokenDto> optionalCustomTokenDto = userService.signIn(signInUserDto);
+        return ResponseEntity.ok(optionalCustomTokenDto.get());
     }
 
     @PostMapping("/sign-up")
-    public ResponseEntity signUp(@Valid @RequestBody RegisterUserDto registerUserDto, BindingResult bindingResult) {
+    public void signUp(@Valid @RequestBody RegisterUserDto registerUserDto, BindingResult bindingResult) throws ServiceException, ExistsException {
+        userValidator.validate(registerUserDto, bindingResult);
         if (bindingResult.hasErrors()) {
-            return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.BAD_REQUEST);
+            throw new ExistsException(bindingResult.getAllErrors());
         }
-        try {
-            userService.register(registerUserDto);
-        } catch (ServiceException exception) {
-            return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-        return ResponseEntity.ok().build();
+        userService.register(registerUserDto);
     }
 
     @GetMapping("/refresh")
-    public ResponseEntity refresh(@RequestHeader(name = REFRESH_TOKEN) String refreshToken) {
-        try {
-            Optional<CustomTokenDto> tokenDtoOptional = userService.refresh(refreshToken);
-            return ResponseEntity.ok(tokenDtoOptional.get());
-        } catch (ServiceException exception) {
-            return new ResponseEntity<>(exception.getMessage(), HttpStatus.UNAUTHORIZED);
-        }
+    public ResponseEntity<CustomTokenDto> refresh(@RequestHeader(name = REFRESH_TOKEN) String refreshToken) throws ServiceException {
+        Optional<CustomTokenDto> tokenDtoOptional = userService.refresh(refreshToken);
+        return ResponseEntity.ok(tokenDtoOptional.get());
+
     }
 }

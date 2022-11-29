@@ -1,11 +1,9 @@
-package by.kharchenko.intexsoftproject.controllers.filter;
+package by.kharchenko.intexsoftproject.filter;
 
 import by.kharchenko.intexsoftproject.security.JwtAuthentication;
 import by.kharchenko.intexsoftproject.security.JwtTokenProvider;
 import by.kharchenko.intexsoftproject.security.JwtType;
 import by.kharchenko.intexsoftproject.util.jwt.JwtUtils;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
@@ -21,7 +19,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     private static final String ACCESS_TOKEN = "Access-Token";
     private final JwtTokenProvider jwtTokenProvider;
 
-    public JwtAuthorizationFilter(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider) {
+    public JwtAuthorizationFilter(JwtTokenProvider jwtTokenProvider, AuthenticationManager authenticationManager) {
         super(authenticationManager);
         this.jwtTokenProvider = jwtTokenProvider;
     }

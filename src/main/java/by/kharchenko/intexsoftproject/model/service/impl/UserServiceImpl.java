@@ -16,7 +16,7 @@ import by.kharchenko.intexsoftproject.model.repository.UserRepository;
 import by.kharchenko.intexsoftproject.model.service.UserService;
 import by.kharchenko.intexsoftproject.security.JwtTokenProvider;
 import by.kharchenko.intexsoftproject.security.JwtType;
-import by.kharchenko.intexsoftproject.util.encryption.EncryptionPassword;
+import by.kharchenko.intexsoftproject.util.encryption.CustomPasswordEncoder;
 import by.kharchenko.intexsoftproject.util.filereadwrite.FileReaderWriter;
 import by.kharchenko.intexsoftproject.util.mail.CustomMailSender;
 import by.kharchenko.intexsoftproject.util.validator.PhotoValidator;
@@ -25,6 +25,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -70,7 +71,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> optionalUser = userRepository.findByUsernameOrEmail(signInUserDto.getData());
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
-            String encryptionPassword = EncryptionPassword.encryption(signInUserDto.getPassword());
+            String encryptionPassword = CustomPasswordEncoder.encode(signInUserDto.getPassword());
             if (encryptionPassword.equals(user.getPassword())) {
                 CustomTokenDto customTokenDto = new CustomTokenDto();
                 String accessToken = jwtTokenProvider.createAccessToken(user);
@@ -91,18 +92,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void register(RegisterUserDto registerUserDto) throws ServiceException {
-        boolean isLoginExists = userRepository.findByUsername(registerUserDto.getUsername()).isPresent();
-        if (isLoginExists) {
-            log.info("username: " + registerUserDto.getUsername() + "is already exists");
-            throw new ServiceException("this username is already exists");
-        }
-        boolean isEmailExists = userRepository.findByEmail(registerUserDto.getEmail()).isPresent();
-        if (isEmailExists) {
-            log.info("email: " + registerUserDto.getEmail() + "is already exists");
-            throw new ServiceException("this emil is already exists");
-        }
         User user = UserMapper.INSTANCE.registerUserDtoToUser(registerUserDto);
-        String encryptionPassword = EncryptionPassword.encryption(user.getPassword());
+        String encryptionPassword = CustomPasswordEncoder.encode(registerUserDto.getPassword());
         user.setPassword(encryptionPassword);
         Set<Role> roles = new HashSet<>();
         Optional<Role> role = roleRepository.findByName(RoleType.ROLE_USER);
@@ -135,10 +126,6 @@ public class UserServiceImpl implements UserService {
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             UserDto userDto = UserMapper.INSTANCE.userToUserDto(user);
-            if (user.getPhotoName() != null) {
-                Resource resource = readerWriter.readFile(photoPath, user.getPhotoName());
-                userDto.setPhoto(resource);
-            }
             return Optional.of(userDto);
         }
         log.info("User not found");
@@ -148,18 +135,23 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void addPhoto(MultipartFile file, Long id) throws ServiceException {
-        String name = file.getOriginalFilename();
-        boolean isCorrect = photoValidator.isCorrect(name);
-        if (isCorrect) {
-            String extension = FilenameUtils.getExtension(file.getOriginalFilename());
-            String fileName = id.toString() + "." + extension;
-            boolean isWrite = readerWriter.saveFile(file, photoPath, fileName);
-            if (isWrite) {
-                userRepository.savePhoto(fileName, id);
+        if (!file.isEmpty()) {
+            String name = file.getOriginalFilename();
+            boolean isCorrect = photoValidator.isCorrect(name);
+            if (isCorrect) {
+                String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+                String fileName = id.toString() + "." + extension;
+                boolean isWrite = readerWriter.saveFile(file, photoPath, fileName);
+                if (isWrite) {
+                    userRepository.savePhoto(fileName, id);
+                }
+            } else {
+                log.info("file have to picture");
+                throw new ServiceException("file have to picture");
             }
         } else {
-            log.info("file have to picture");
-            throw new ServiceException("file have to picture");
+            log.info("file is empty");
+            throw new ServiceException("file is empty");
         }
     }
 
@@ -171,8 +163,7 @@ public class UserServiceImpl implements UserService {
         if (product.isPresent()) {
             user.getProducts().add(product.get());
             userRepository.save(user);
-        }
-        else {
+        } else {
             throw new ServiceException("Product with this id not find");
         }
 

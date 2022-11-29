@@ -16,6 +16,4 @@ public class UserDto {
 
     @JsonProperty("email")
     private String email;
-
-    private Resource photo;
 }

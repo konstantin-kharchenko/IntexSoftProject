@@ -19,4 +19,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Query("update User u SET u.photoName = ?1 where u.id = ?2")
     void savePhoto(String path, Long id);
+
+    Optional<User> findByEmailOrUsername(String email, String username);
 }

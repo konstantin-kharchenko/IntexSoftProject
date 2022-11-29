@@ -107,27 +107,60 @@
 			"name": "User",
 			"item": [
 				{
-					"name": "User",
+					"name": "AddPhoto",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "{{access}}",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjY5MDM5ODAxLCJleHAiOjE2NjkwNDA3MDEsInJvbGVzIjpbeyJpZCI6MSwicm9sZSI6IlJPTEVfVVNFUiIsImF1dGhvcml0eSI6W3siaWQiOjEsImF1dGhvcml0eSI6IlJFR0lTVEVSIn0seyJpZCI6MiwiYXV0aG9yaXR5IjoiQ1JFQVRFX09SREVSIn0seyJpZCI6MywiYXV0aG9yaXR5IjoiREVMRVRFX09SREVSIn0seyJpZCI6NCwiYXV0aG9yaXR5IjoiRURJVF9PUkRFUiJ9LHsiaWQiOjUsImF1dGhvcml0eSI6IkFERF9UT19CQVNLRVQifV19XX0.BpYAqAAkKfxjbnGwcuo4W9lkjLsJKWqBgdzvZ-lwL6g06EIgycAEHlDr9M053cICo4W777M-ifodEgWk5N79oA",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjY5NzM1NTI2LCJleHAiOjE2Njk3MzkxMjYsInJvbbeyJpZCI6MSwicm9sZSI6IlJPTEVfVVNFUiIsImF1dGhvcml0eSI6W3siaWQiOjEsImF1dGhvcml0eSI6IlJFR0lTVEVSIn0seyJpZCI6MiwiYXV0aG9yaXR5IjoiQ1JFQVRFX09SREVSIn0seyJpZCI6MywiYXV0aG9yaXR5IjoiREVMRVRFX09SREVSIn0seyJpZCI6NCwiYXV0aG9yaXR5IjoiRURJVF9PUkRFUiJ9LHsiaWQiOjUsImF1dGhvcml0eSI6IkFERF9UT19CQVNLRVQifV19XX0.dz8f4DvG6IDdpl27-ONqUMJRlDs6rvaMp2cNMbSd_m9Avs2sDmLGaZ6XXn_0rzlHySTy_hJ4-ZNNZfPKpaCRmQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/D:/91-4.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}user/photo",
+							"host": [
+								"{{domain}}user"
+							],
+							"path": [
+								"photo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddProductInBasket",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "{{access}}",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjY5Mjg5NjUwLCJleHAiOjE2NjkyOTA1NTAsInJvbGVzIjpbeyJpZCI6MSwicm9sZSI6IlJPTEVfVVNFUiIsImF1dGhvcml0eSI6W3siaWQiOjEsImF1dGhvcml0eSI6IlJFR0lTVEVSIn0seyJpZCI6MiwiYXV0aG9yaXR5IjoiQ1JFQVRFX09SREVSIn0seyJpZCI6MywiYXV0aG9yaXR5IjoiREVMRVRFX09SREVSIn0seyJpZCI6NCwiYXV0aG9yaXR5IjoiRURJVF9PUkRFUiJ9LHsiaWQiOjUsImF1dGhvcml0eSI6IkFERF9UT19CQVNLRVQifV19XX0.83EdVCbJvjuYW1mmo170ul59QslbaOk_WTWnuPvVvporbEzAhlQKjnjvaEq9yHL81YNYziwzDzWgX-7hIbHplw",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{domain}}user",
+							"raw": "{{domain}}product/2/add-to-basket",
 							"host": [
-								"{{domain}}user"
+								"{{domain}}product"
 							],
-							"query": [
-								{
-									"key": "",
-									"value": "",
-									"disabled": true
-								}
+							"path": [
+								"2",
+								"add-to-basket"
 							]
 						}
 					},
@@ -143,7 +176,7 @@
 						"header": [
 							{
 								"key": "{{access}}",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjY5NDgyNTQ4LCJleHAiOjE2Njk0ODYxNDgsInJvbGVzIjpbeyJpZCI6MSwicm9sZSI6IlJPTEVfVVNFUiIsImF1dGhvcml0eSI6W3siaWQiOjEsImF1dGhvcml0eSI6IlJFR0lTVEVSIn0seyJpZCI6MiwiYXV0aG9yaXR5IjoiQ1JFQVRFX09SREVSIn0seyJpZCI6MywiYXV0aG9yaXR5IjoiREVMRVRFX09SREVSIn0seyJpZCI6NCwiYXV0aG9yaXR5IjoiRURJVF9PUkRFUiJ9LHsiaWQiOjUsImF1dGhvcml0eSI6IkFERF9UT19CQVNLRVQifV19XX0.ZZxuHELhl1wMuC4VuI1GcylN2_1MRCEWEQCpDC7R7vx14tAImyT39bakqkcYspy7_HrLdqarkYqxr4P5xsWchQ",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjY5NzM1NTI2LCJleHAiOjE2Njk3MzkxMjYsInJvbGVzIjpbeyJpZCI6MSwicm9sZSI6IlJPTEVfVVNFUiIsImF1dGhvcml0eSI6W3siaWQiOjEsImF1dGhvcml0eSI6IlJFR0lTVEVSIn0seyJpZCI6MiwiYXV0aG9yaXR5IjoiQ1JFQVRFX09SREVSIn0seyJpZCI6MywiYXV0aG9yaXR5IjoiREVMRVRFX09SREVSIn0seyJpZCI6NCwiYXV0aG9yaXR5IjoiRURJVF9PUkRFUiJ9LHsiaWQiOjUsImF1dGhvcml0eSI6IkFERF9UT19CQVNLRVQifV19XX0.dz8f4DvG6IDdpl27-ONqUMJRlDs6rvaMp2cNMbSd_m9Avs2sDmLGaZ6XXn_0rzlHySTy_hJ4-ZNNZfPKpaCRmQ",
 								"type": "text"
 							}
 						],
@@ -175,43 +208,13 @@
 					"response": []
 				},
 				{
-					"name": "AddPhoto",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "{{access}}",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjY5MjIzMjQ2LCJleHAiOjE2NjkyMjQxNDYsInJvbGVzIjpbeyJpZCI6MSwicm9sZSI6IlJPTEVfVVNFUiIsImF1dGhvcml0eSI6W3siaWQiOjEsImF1dGhvcml0eSI6IlJFR0lTVEVSIn0seyJpZCI6MiwiYXV0aG9yaXR5IjoiQ1JFQVRFX09SREVSIn0seyJpZCI6MywiYXV0aG9yaXR5IjoiREVMRVRFX09SREVSIn0seyJpZCI6NCwiYXV0aG9yaXR5IjoiRURJVF9PUkRFUiJ9LHsiaWQiOjUsImF1dGhvcml0eSI6IkFERF9UT19CQVNLRVQifV19XX0.qF83Ni8h4yusXTwd_-znjfrmypxH1x9cukKjpSAlOGTMl3dl6N-foIbjzrV31EQHO-o8Are1iqpjN5iD-RK5UQ",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "file",
-									"type": "file",
-									"src": "/D:/91-4.jpg"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{domain}}photo",
-							"host": [
-								"{{domain}}photo"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Product",
 					"request": {
 						"method": "GET",
 						"header": [
 							{
 								"key": "{{access}}",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjY5MjI4ODc3LCJleHAiOjE2NjkyMjk3NzcsInJvbGVzIjpbeyJpZCI6MSwicm9sZSI6IlJPTEVfVVNFUiIsImF1dGhvcml0eSI6W3siaWQiOjEsImF1dGhvcml0eSI6IlJFR0lTVEVSIn0seyJpZCI6MiwiYXV0aG9yaXR5IjoiQ1JFQVRFX09SREVSIn0seyJpZCI6MywiYXV0aG9yaXR5IjoiREVMRVRFX09SREVSIn0seyJpZCI6NCwiYXV0aG9yaXR5IjoiRURJVF9PUkRFUiJ9LHsiaWQiOjUsImF1dGhvcml0eSI6IkFERF9UT19CQVNLRVQifV19XX0.GixXyOKXWoYcYbmbvqYbPFiTN2vRqrFouGZ2-GE5IwY5oxBcD4ITwOyKAl7tj1415lbyOPz3u2f14Z7mDSaAlg",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjY5NzQyMjM3LCJleHAiOjE2Njk3NDU4MzcsInJvbGVzIjpbeyJpZCI6MSwicm9sZSI6IlJPTEVfVVNFUiIsImF1dGhvcml0eSI6W3siaWQiOjEsImF1dGhvcml0eSI6IlJFR0lTVEVSIn0seyJpZCI6MiwiYXV0aG9yaXR5IjoiQ1JFQVRFX09SREVSIn0seyJpZCI6MywiYXV0aG9yaXR5IjoiREVMRVRFX09SREVSIn0seyJpZCI6NCwiYXV0aG9yaXR5IjoiRURJVF9PUkRFUiJ9LHsiaWQiOjUsImF1dGhvcml0eSI6IkFERF9UT19CQVNLRVQifV19XX0.lmqA4S6raM01zGGqJ_2nXvKW3IHWQMnvHec2Z_ncSbCwG2wO9yqNcVIedWxlXikP_MspB4M3-5AsjcRUpCWotg",
 								"type": "text"
 							},
 							{
@@ -234,24 +237,51 @@
 					"response": []
 				},
 				{
-					"name": "AddProductInBasket",
+					"name": "ProductPicture",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [
 							{
 								"key": "{{access}}",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjY5Mjg5NjUwLCJleHAiOjE2NjkyOTA1NTAsInJvbGVzIjpbeyJpZCI6MSwicm9sZSI6IlJPTEVfVVNFUiIsImF1dGhvcml0eSI6W3siaWQiOjEsImF1dGhvcml0eSI6IlJFR0lTVEVSIn0seyJpZCI6MiwiYXV0aG9yaXR5IjoiQ1JFQVRFX09SREVSIn0seyJpZCI6MywiYXV0aG9yaXR5IjoiREVMRVRFX09SREVSIn0seyJpZCI6NCwiYXV0aG9yaXR5IjoiRURJVF9PUkRFUiJ9LHsiaWQiOjUsImF1dGhvcml0eSI6IkFERF9UT19CQVNLRVQifV19XX0.83EdVCbJvjuYW1mmo170ul59QslbaOk_WTWnuPvVvporbEzAhlQKjnjvaEq9yHL81YNYziwzDzWgX-7hIbHplw",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjY5NzQyMjM3LCJleHAiOjE2Njk3NDU4MzcsInJvbGVzIjpbeyJpZCI6MSwicm9sZSI6IlJPTEVfVVNFUiIsImF1dGhvcml0eSI6W3siaWQiOjEsImF1dGhvcml0eSI6IlJFR0lTVEVSIn0seyJpZCI6MiwiYXV0aG9yaXR5IjoiQ1JFQVRFX09SREVSIn0seyJpZCI6MywiYXV0aG9yaXR5IjoiREVMRVRFX09SREVSIn0seyJpZCI6NCwiYXV0aG9yaXR5IjoiRURJVF9PUkRFUiJ9LHsiaWQiOjUsImF1dGhvcml0eSI6IkFERF9UT19CQVNLRVQifV19XX0.lmqA4S6raM01zGGqJ_2nXvKW3IHWQMnvHec2Z_ncSbCwG2wO9yqNcVIedWxlXikP_MspB4M3-5AsjcRUpCWotg",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{domain}}product/2/add-to-basket",
+							"raw": "{{domain}}product/picture/1",
 							"host": [
 								"{{domain}}product"
 							],
 							"path": [
-								"2",
-								"add-to-basket"
+								"picture",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "{{access}}",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjY5NzQyMjM3LCJleHAiOjE2Njk3NDU4MzcsvbGVzIjpbeyJpZCI6MSwicm9sZSI6IlJPTEVfVVNFUiIsImF1dGhvcml0eSI6W3siaWQiOjEsImF1dGhvcml0eSI6IlJFR0lTVEVSIn0seyJpZCI6MiwiYXV0aG9yaXR5IjoiQ1JFQVRFX09SREVSIn0seyJpZCI6MywiYXV0aG9yaXR5IjoiREVMRVRFX09SREVSIn0seyJpZCI6NCwiYXV0aG9yaXR5IjoiRURJVF9PUkRFUiJ9LHsiaWQiOjUsImF1dGhvcml0eSI6IkFERF9UT19CQVNLRVQifV19XX0.lmqA4S6raM01zGGqJ_2nXvKW3IHWQMnvHec2Z_ncSbCwG2wO9yqNcVIedWxlXikP_MspB4M3-5AsjcRUpCW",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}user",
+							"host": [
+								"{{domain}}user"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
 							]
 						}
 					},

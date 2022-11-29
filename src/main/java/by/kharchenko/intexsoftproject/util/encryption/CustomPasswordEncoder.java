@@ -5,11 +5,11 @@ import by.kharchenko.intexsoftproject.exception.ServiceException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class EncryptionPassword {
+public class CustomPasswordEncoder {
 
     private static final String ENCRYPTION_TYPE = "MD5";
 
-    public static String encryption(String password) throws ServiceException {
+    public static String encode(String password) throws ServiceException {
         MessageDigest md5 = null;
         try {
             md5 = MessageDigest.getInstance(ENCRYPTION_TYPE);
